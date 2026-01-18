@@ -2,9 +2,29 @@ pipeline {
     agent any
 
     stages {
-        stage('Sanity Check') {
+        stage('Checkout') {
             steps {
-                echo 'Jenkinsfile loaded successfully from GitHub'
+                checkout scm
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh '''
+                    python3 -m venv venv
+                    . venv/bin/activate
+                    pip install --upgrade pip
+                    pip install -r app/requirements.txt
+                '''
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh '''
+                    . venv/bin/activate
+                    pytest app/test_app.py
+                '''
             }
         }
     }
