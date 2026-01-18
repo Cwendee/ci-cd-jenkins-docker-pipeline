@@ -1,0 +1,11 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Sanity Check') {
+            steps {
+                echo 'Jenkinsfile was found and executed successfully'
+            }
+        }
+    }
+}
