@@ -13,21 +13,21 @@ This project was designed to reflect real-world constraints such as:
 - Idempotent deployments
 - Clear failure signals
 
+
 ## Project Structure
 
-```text
-ci-cd-jenkins-docker-pipeline/
-├── app/
-│   ├── app.py
-│   ├── test_app.py
-│   └── requirements.txt
-├── docker/
-│   └── Dockerfile
-├── jenkins/
-│   └── Jenkinsfile
-├── scripts/
-├── ci-cd-architecture.png
-└── README.md
+    ci-cd-jenkins-docker-pipeline/
+    ├── app/
+    │   ├── app.py
+    │   ├── test_app.py
+    │   └── requirements.txt
+    ├── docker/
+    │   └── Dockerfile
+    ├── jenkins/
+    │   └── Jenkinsfile
+    ├── scripts/
+    ├── ci-cd-architecture.png
+    └── README.md
 
 
 ## Architecture Overview
@@ -42,32 +42,32 @@ This project demonstrates a production-style CI/CD pipeline using Jenkins and Do
 
 ## CI/CD Pipeline Stages
 
-### Checkout
+### 📥 Checkout
 - Jenkins pulls source code from GitHub
 - Jenkinsfile path explicitly set to `jenkins/Jenkinsfile`
 
-### Build
+### 🛠️ Build
 - Python virtual environment is created
 - Dependencies installed from `requirements.txt`
 
-### Test
+### 🧪 Test
 - Tests executed using pytest
 - Pipeline fails immediately on test failure
 
-### Docker Build
+### 🐳 Docker Build
 - Image built using a lightweight Python base image
 - `.dockerignore` reduces build context
 
-### Deploy
+### 🚀 Deploy
 - Existing container is removed if present
 - New container is started with explicit port mapping
 - Deployment is idempotent and safe to re-run
 
-### Health Check
+### ❤️‍🩹 Health Check
 - Jenkins sends HTTP request to `/health`
 - Pipeline succeeds only if application responds correctly
 
-## Key Design Decisions
+## 🧠 Key Design Decisions
 
 - Tests run before Docker build to fail fast and reduce wasted build time
 - Container port (5000) mapped to host port (5001) to avoid conflicts
@@ -75,7 +75,7 @@ This project demonstrates a production-style CI/CD pipeline using Jenkins and Do
 - Named containers used for predictable management
 - Health checks validate application availability, not just container status
 
-## Challenges and Resolutions
+## 🚧 Challenges and Resolutions
 
 ### Jenkinsfile Not Found
 - Root cause: Incorrect SCM script path
@@ -85,18 +85,18 @@ This project demonstrates a production-style CI/CD pipeline using Jenkins and Do
 - Root cause: Port 5000 already in use by another service
 - Resolution: Mapped container port 5000 to host port 5001
 
-### Health Check Failures
+### ❤️‍🩹 Health Check Failures
 - Root cause: Incorrect port mapping and Flask binding
 - Resolution: Corrected Docker run syntax and Flask host binding
 
-## Outcome
+## 🔆 Outcome
 
 - Fully automated CI/CD pipeline running successfully
 - Safe container redeployments on shared infrastructure
 - Deployment verified through application-level health checks
 - Pipeline produces deterministic, repeatable results
 
-## What This Project Demonstrates
+## 📝 What This Project Demonstrates
 
 - Real-world CI/CD pipeline design
 - Jenkins + Docker integration
